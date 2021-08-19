@@ -1,35 +1,14 @@
-import './index.css';
-import logo from './images/logo.svg';
-import avatar from './images/image.jpg';
-import buttonAvatar from './images/Vector_pen.png';
+import '../index.css';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
 
 function App() {
   return (
     <div className="root">
-      <header className="header">
-        <a href="#" target="_self" className="header__link">
-          <img src={logo} alt="Логотип" className="header__logo" />
-        </a>
-      </header>
-      <main className="main">
-        <section className="profile">
-          <img src={avatar} alt="Аватарка" className="profile__avatar" />
-          <button type="button" src={buttonAvatar} className="profile__avatar-activ"></button>
-          <div className="profile-info">
-            <h1 className="profile-info__title">Жак_Ив Кусто</h1>
-            <button type="button" className="profile-info__button"></button>
-            <p className="profile-info__text">Исследователь океана</p>
-          </div>
-          <button type="button" className="profile__button"></button>
-        </section>
-        <section>
-          <ul className="elements">
-          </ul>
-        </section>
-      </main>
-      <footer className="footer">
-        <p className="footer__copyright">&copy; 2021 Mesto Russia</p>
-      </footer>
+      <Header />
+      <Main />
+      <Footer />      
       <div className="popup popup_type_edit-profile">
         <div className="popup__content">
           <button type="button" className="popup__button popup__button_profile popup__button-close"></button>
@@ -87,7 +66,7 @@ function App() {
       <div className="popup popup_type_image">
         <div className="images-content">
           <button type="button" className="images-content__button popup__button-close"></button>
-          <img className="images-content__foto" src={logo} alt="foto" />
+          <img className="images-content__foto" src="" alt="foto" />
           <h2 className="images-content__title"></h2>
         </div>
       </div>
