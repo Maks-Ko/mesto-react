@@ -2,13 +2,52 @@ import '../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 function App() {
   return (
     <div className="root">
       <Header />
       <Main />
-      <Footer />      
+      <Footer />
+      <PopupWithForm
+          name="edit-profile"
+          title="Редактировать профиль"
+          id="profileFormValidator"
+          children={
+              <>
+                <input name="user_name" id="user_name" className="form__text form__text_edit_name" type="text" placeholder="Имя" required minlength="2" maxlength="40" />
+                <span id="user_name-error" className="form__input-error"></span>
+                <input name="activity" id="activity" className="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" required minlength="2" maxlength="200" />
+                <span id="activity-error" className="form__input-error"></span>
+              </>
+            } />
+      <PopupWithForm
+          name="add-card"
+          title="Новое место"
+          id="cardFormValidator"
+          children={
+            <>
+              <input name="image_name" id="image_name" className="form__text form__text_edit_name" type="text" placeholder="Название" required minlength="2" maxlength="30" />
+              <span id="image_name-error" className="form__input-error"></span>
+              <input name="url_image" id="url_image" className="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на картинку" required />
+              <span id="url_image-error" className="form__input-error"></span>
+            </>
+          } />
+      <PopupWithForm
+          name="edit-avatar"
+          title="Обновить аватар"
+          children={
+            <>
+              <input name="url_avatar" id="url_avatar" className="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на аватарку" required />
+              <span id="url_avatar-error" className="form__input-error"></span>
+            </>
+          } />
+      <PopupWithForm
+          name="delete-card"
+          title="Вы уверены?" />
+      <ImagePopup />
       <template id="element-template">
         <li className="element">
           <button type="button" className="element__delete"></button>

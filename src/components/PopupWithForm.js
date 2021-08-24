@@ -1,0 +1,20 @@
+function PopupWithForm(props) {
+    return(
+        <>
+            <div className={`popup popup_type_${props.name}`}>
+                <div className="popup__content">
+                <button type="button" className="popup__button popup__button_profile popup__button-close"></button>
+                <h2 className="popup__title">{`${props.title}`}</h2>
+                <form name={`${props.name}`} className="form form_profile" id={`${props.id}`} novalidate>
+                    <fieldset className="form__container">
+                    {props.children}
+                    <button type="submit" className="form__button">Сохранить</button>
+                    </fieldset>
+                </form>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default PopupWithForm;
