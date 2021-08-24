@@ -2,6 +2,7 @@ import React from 'react';
 import avatar from '../images/image.jpg';
 import buttonAvatar from '../images/Vector_pen.png';
 import Api from '../utils/Api';
+import Card from './Card';
 
 function Main(props) {
     const api = new Api();
@@ -40,19 +41,7 @@ function Main(props) {
                 </section>
                 <section>
                     <ul className="elements">
-                        {cards.map(card => {return(
-                            <li className="element">
-                                <button type="button" className="element__delete"></button>
-                                <img className="element__foto" src={card.link} />
-                                <div className="element__lable">
-                                    <p className="element__title">{card.name}</p>
-                                    <div className="element__lable-likes">
-                                    <button type="button" className="element__like"></button>
-                                    <p className="element__numder-likes">{card.likes.length}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        )})}
+                        {cards.map(card => {return(<Card name={card.name} link={card.link} likes={card.likes} key={card._id} onCardClick={props.onCardClick} />)})}
                     </ul>
                 </section>
             </main>
