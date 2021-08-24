@@ -4,14 +4,38 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import React from 'react';
 
 function App() {
+  
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function closeAllPopups(){
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  }
+  
   return (
     <div className="root">
       <Header />
-      <Main />
+      <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} />
       <Footer />
       <PopupWithForm
+          isOpen = {isEditProfilePopupOpen ? "popup_is-opened" : ""}
+          onClose = {closeAllPopups}
           name="edit-profile"
           title="Редактировать профиль"
           id="profileFormValidator"
@@ -22,8 +46,11 @@ function App() {
                 <input name="activity" id="activity" className="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" required minlength="2" maxlength="200" />
                 <span id="activity-error" className="form__input-error"></span>
               </>
-            } />
+            }
+          />
       <PopupWithForm
+          isOpen = {isAddPlacePopupOpen ? "popup_is-opened" : ""}
+          onClose = {closeAllPopups}
           name="add-card"
           title="Новое место"
           id="cardFormValidator"
@@ -36,6 +63,8 @@ function App() {
             </>
           } />
       <PopupWithForm
+          isOpen = {isEditAvatarPopupOpen ? "popup_is-opened" : ""}
+          onClose = {closeAllPopups}
           name="edit-avatar"
           title="Обновить аватар"
           children={
