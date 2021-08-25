@@ -27,25 +27,25 @@ function Main(props) {
     }, []);
 
     return(
-        <>
-            <main className="main">
-                <section className="profile">
-                    <img src={dataUser.userAvatar} alt="Аватарка" className="profile__avatar" />
-                    <button type="button" src={buttonAvatar} className="profile__avatar-activ" onClick={props.onEditAvatar}></button>
-                    <div className="profile-info">
-                        <h1 className="profile-info__title">{dataUser.userName}</h1>
-                        <button type="button" className="profile-info__button" onClick={props.onEditProfile}></button>
-                        <p className="profile-info__text">{dataUser.userDescription}</p>
-                    </div>
-                    <button type="button" className="profile__button" onClick={props.onAddPlace}></button>
-                </section>
-                <section>
-                    <ul className="elements">
-                        {cards.map(card => {return(<Card name={card.name} link={card.link} likes={card.likes} key={card._id} onCardClick={props.onCardClick} />)})}
-                    </ul>
-                </section>
-            </main>
-        </>
+        
+        <main className="main">
+            <section className="profile">
+                <img src={dataUser.userAvatar} alt="Аватарка" className="profile__avatar" />
+                <button type="button" src={buttonAvatar} className="profile__avatar-activ" onClick={props.onEditAvatar}></button>
+                <div className="profile-info">
+                    <h1 className="profile-info__title">{dataUser.userName}</h1>
+                    <button type="button" className="profile-info__button" onClick={props.onEditProfile}></button>
+                    <p className="profile-info__text">{dataUser.userDescription}</p>
+                </div>
+                <button type="button" className="profile__button" onClick={props.onAddPlace}></button>
+            </section>
+            <section>
+                <ul className="elements">
+                    {cards.map(card => {return(<Card name={card.name} link={card.link} likes={card.likes} key={card._id} onCardClick={props.onCardClick} />)})}
+                </ul>
+            </section>
+        </main>
+        
     )    
 }
 
