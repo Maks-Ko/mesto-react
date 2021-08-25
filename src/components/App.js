@@ -11,7 +11,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({});
+  const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, name: '', link: ''});
   
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -54,9 +54,9 @@ function App() {
           id="profileFormValidator"
           children={
               <>
-                <input name="user_name" id="user_name" className="form__text form__text_edit_name" type="text" placeholder="Имя" required minlength="2" maxlength="40" />
+                <input name="user_name" id="user_name" className="form__text form__text_edit_name" type="text" placeholder="Имя" requiredminlength="2" maxLength="40" />
                 <span id="user_name-error" className="form__input-error"></span>
-                <input name="activity" id="activity" className="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" required minlength="2" maxlength="200" />
+                <input name="activity" id="activity" className="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" requiredminlength="2" maxLength="200" />
                 <span id="activity-error" className="form__input-error"></span>
               </>
             }
@@ -69,7 +69,7 @@ function App() {
           id="cardFormValidator"
           children={
             <>
-              <input name="image_name" id="image_name" className="form__text form__text_edit_name" type="text" placeholder="Название" required minlength="2" maxlength="30" />
+              <input name="image_name" id="image_name" className="form__text form__text_edit_name" type="text" placeholder="Название" requiredminlength="2" maxLength="30" />
               <span id="image_name-error" className="form__input-error"></span>
               <input name="url_image" id="url_image" className="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на картинку" required />
               <span id="url_image-error" className="form__input-error"></span>
