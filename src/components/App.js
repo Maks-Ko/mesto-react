@@ -52,6 +52,7 @@ function App() {
           name="edit-profile"
           title="Редактировать профиль"
           id="profileFormValidator"
+          buttonText="Сохранить"
           >
             <input name="user_name" id="user_name" className="form__text form__text_edit_name" type="text" placeholder="Имя" requiredminlength="2" maxLength="40" />
             <span id="user_name-error" className="form__input-error"></span>
@@ -64,6 +65,7 @@ function App() {
           name="add-card"
           title="Новое место"
           id="cardFormValidator"
+          buttonText="Сохранить"
           >
             <input name="image_name" id="image_name" className="form__text form__text_edit_name" type="text" placeholder="Название" requiredminlength="2" maxLength="30" />
             <span id="image_name-error" className="form__input-error"></span>
@@ -75,13 +77,15 @@ function App() {
           onClose = {closeAllPopups}
           name="edit-avatar"
           title="Обновить аватар"
+          buttonText="Сохранить"
           >
             <input name="url_avatar" id="url_avatar" className="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на аватарку" required />
             <span id="url_avatar-error" className="form__input-error"></span>
           </PopupWithForm>
       <PopupWithForm
           name="delete-card"
-          title="Вы уверены?" />
+          title="Вы уверены?"
+          buttonText="Удалить" />
       <ImagePopup
           isOpen = {selectedCard.isOpen ? "popup_is-opened" : ""}
           onClose = {closeAllPopups}

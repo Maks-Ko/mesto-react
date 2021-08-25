@@ -8,7 +8,7 @@ function PopupWithForm(props) {
             <form name={`${props.name}`} className="form form_profile" id={`${props.id}`}>
                 <fieldset className="form__container">
                 {props.children}
-                <button type="submit" className="form__button">Сохранить</button>
+                <button type="submit" className="form__button">{props.buttonText}</button>
                 </fieldset>
             </form>
             </div>
