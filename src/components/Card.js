@@ -7,7 +7,7 @@ function Card(props) {
     return(
         <li className="element">
             <button type="button" className="element__delete"></button>
-            <img className="element__foto" src={props.link} onClick={handleClick} />
+            <img className="element__foto" src={props.link} alt={props.name} onClick={handleClick} />
             <div className="element__lable">
                 <p className="element__title">{props.name}</p>
                 <div className="element__lable-likes">
