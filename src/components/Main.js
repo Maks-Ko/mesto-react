@@ -8,7 +8,6 @@ function Main(props) {
     const api = new Api();    
     const [cards, setCards] = React.useState([]);
     const currentUser = React.useContext(CurrentUserContext);
-    //console.log(currentUser);
 
     React.useEffect(() => {        
         api.getItemsCards()
@@ -20,6 +19,16 @@ function Main(props) {
         });
 
     }, []);
+
+    function handleCardLike(card) {
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        
+        // Отправляем запрос в API и получаем обновлённые данные карточки
+        api.toggleLikeCard(card._id, isLiked).then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        });
+    }
 
     return(
         
@@ -36,7 +45,17 @@ function Main(props) {
             </section>
             <section>
                 <ul className="elements">
-                    {cards.map(card => {return(<Card name={card.name} link={card.link} likes={card.likes} key={card._id} onCardClick={props.onCardClick} />)})}
+                    {cards.map(card => {return(
+                    <Card
+                        name={card.name}
+                        link={card.link}
+                        likes={card.likes}
+                        _id={card._id}
+                        key={card._id}
+                        owner={card.owner}
+                        onCardClick={props.onCardClick}
+                        onCardLike={handleCardLike}
+                    />)})}
                 </ul>
             </section>
         </main>
