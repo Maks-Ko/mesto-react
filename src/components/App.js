@@ -3,6 +3,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
 import ImagePopup from './ImagePopup';
 import React from 'react';
 import Api from '../utils/Api';
@@ -18,13 +19,12 @@ function App() {
 
   React.useEffect(() => {
     api.getItemsUser()
-    .then((date) =>{
-        setCurrentUser(date);   
+    .then((date) => {
+        setCurrentUser(date);
     })
     .catch((err) => {
         console.log(err); // "Что-то пошло не так: ..."
     });
-
   }, []);
   
   function handleEditProfileClick() {
@@ -43,7 +43,6 @@ function App() {
       link: link,
     })
   }
-
   function closeAllPopups(){
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -54,6 +53,16 @@ function App() {
       link: '',
     });
   }
+  function handleUpdateUser(props) {   
+    api.editProfile(props)
+    .then((date) => {
+      setCurrentUser(date);
+      closeAllPopups();     
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    });
+  }
   
   return (
     <div className="root">
@@ -61,19 +70,7 @@ function App() {
         <Header />
         <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} />
         <Footer />
-        <PopupWithForm
-            isOpen = {isEditProfilePopupOpen ? "popup_is-opened" : ""}
-            onClose = {closeAllPopups}
-            name="edit-profile"
-            title="Редактировать профиль"
-            id="profileFormValidator"
-            buttonText="Сохранить"
-            >
-              <input name="user_name" id="user_name" className="form__text form__text_edit_name" type="text" placeholder="Имя" requiredminlength="2" maxLength="40" />
-              <span id="user_name-error" className="form__input-error"></span>
-              <input name="activity" id="activity" className="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" requiredminlength="2" maxLength="200" />
-              <span id="activity-error" className="form__input-error"></span>
-            </PopupWithForm>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>       
         <PopupWithForm
             isOpen = {isAddPlacePopupOpen ? "popup_is-opened" : ""}
             onClose = {closeAllPopups}
