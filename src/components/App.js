@@ -19,16 +19,13 @@ function App() {
   React.useEffect(() => {
     api.getItemsUser()
     .then((date) =>{
-        setCurrentUser(date);
-        //console.log(date);      
+        setCurrentUser(date);   
     })
     .catch((err) => {
         console.log(err); // "Что-то пошло не так: ..."
     });
 
   }, []);
-
- // console.log(currentUser);
   
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
