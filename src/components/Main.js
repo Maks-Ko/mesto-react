@@ -11,7 +11,7 @@ function Main(props) {
         <main className="main">
             <section className="profile">
                 <img src={currentUser.avatar} alt="Аватарка" className="profile__avatar" />
-                <button type="button" src={buttonAvatar} className="profile__avatar-activ" onClick={props.onEditAvatar}></button>
+                <button type="button" background={buttonAvatar} className="profile__avatar-activ" onClick={props.onEditAvatar}></button>
                 <div className="profile-info">
                     <h1 className="profile-info__title">{currentUser.name}</h1>
                     <button type="button" className="profile-info__button" onClick={props.onEditProfile}></button>
