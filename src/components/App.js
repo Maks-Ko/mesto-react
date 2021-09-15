@@ -8,16 +8,15 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import React from 'react';
-import Api from '../utils/Api';
+import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
-  const api = new Api();
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, name: '', link: ''});  
-  const [currentUser, setCurrentUser] = React.useState([]);
+  const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -45,26 +44,37 @@ function App() {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);    
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.toggleLikeCard(card._id, isLiked).then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    api.toggleLikeCard(card._id, isLiked)
+    .then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
     });
   }
+
   function handleCardDelete(card) {
-    api.deleteCardUser(card._id).then(() => {
-        const newCard = cards.filter((c) => c._id !== card._id);
-        setCards(newCard);
-    });    
+    api.deleteCardUser(card._id)
+    .then(() => {
+      setCards((cards) => cards.filter((c) => c._id !== card._id));
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    });
   }
   
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
+
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
+
   function handleCardClick(name, link) {
     setSelectedCard({
       isOpen: true,
@@ -72,6 +82,19 @@ function App() {
       link: link,
     })
   }
+
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+
+    document.addEventListener('keydown', closeByEscape);
+    
+    return () => document.removeEventListener('keydown', closeByEscape);
+  }, []);
+
   function closeAllPopups(){
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -82,6 +105,7 @@ function App() {
       link: '',
     });
   }
+
   function handleUpdateUser(props) {
     api.editProfile(props)
     .then((date) => {
@@ -92,6 +116,7 @@ function App() {
       console.log(err); // "Что-то пошло не так: ..."
     });
   }
+
   function handleUpdateAvatar(props) {
     api.editAvatar(props)
     .then((date) => {
@@ -102,6 +127,7 @@ function App() {
       console.log(err); // "Что-то пошло не так: ..."
     });
   }
+  
   function handleAddPlaceSubmit(props) {
     api.addCardForm(props)
     .then((newCard) => {

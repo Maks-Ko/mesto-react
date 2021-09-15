@@ -91,4 +91,6 @@ class Api {
     }
 }
 
-export default Api;
+const api = new Api();
+
+export default api;
