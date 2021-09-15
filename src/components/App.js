@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import ImagePopup from './ImagePopup';
 import React from 'react';
 import Api from '../utils/Api';
@@ -63,6 +64,16 @@ function App() {
       console.log(err); // "Что-то пошло не так: ..."
     });
   }
+  function handleUpdateAvatar(props) {
+    api.editAvatar(props)
+    .then((date) => {
+      setCurrentUser(date);
+      closeAllPopups();     
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    });
+  }
   
   return (
     <div className="root">
@@ -70,7 +81,8 @@ function App() {
         <Header />
         <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} />
         <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>       
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <PopupWithForm
             isOpen = {isAddPlacePopupOpen ? "popup_is-opened" : ""}
             onClose = {closeAllPopups}
@@ -83,17 +95,7 @@ function App() {
               <span id="image_name-error" className="form__input-error"></span>
               <input name="url_image" id="url_image" className="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на картинку" required />
               <span id="url_image-error" className="form__input-error"></span>
-            </PopupWithForm>
-        <PopupWithForm
-            isOpen = {isEditAvatarPopupOpen ? "popup_is-opened" : ""}
-            onClose = {closeAllPopups}
-            name="edit-avatar"
-            title="Обновить аватар"
-            buttonText="Сохранить"
-            >
-              <input name="url_avatar" id="url_avatar" className="form__text form__text_edit_about-me" type="url" placeholder="Ссылка на аватарку" required />
-              <span id="url_avatar-error" className="form__input-error"></span>
-            </PopupWithForm>
+            </PopupWithForm>        
         <PopupWithForm
             name="delete-card"
             title="Вы уверены?"
