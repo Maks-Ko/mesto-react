@@ -36,9 +36,9 @@ function EditProfilePopup(props) {
             buttonText="Сохранить"
             onSubmit={handleSubmit}
             >
-              <input name="user_name" value={name} onChange={handleChangeName} id="user_name" className="form__text form__text_edit_name" type="text" placeholder="Имя" requiredminlength="2" maxLength="40" />
+              <input name="user_name" value={name || ''} onChange={handleChangeName} id="user_name" className="form__text form__text_edit_name" type="text" placeholder="Имя" requiredminlength="2" maxLength="40" />
               <span id="user_name-error" className="form__input-error"></span>
-              <input name="activity" value={description} onChange={handleChangeDescription} id="activity" className="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" requiredminlength="2" maxLength="200" />
+              <input name="activity" value={description || ''} onChange={handleChangeDescription} id="activity" className="form__text form__text_edit_about-me" type="text" placeholder="Вид деятельности" requiredminlength="2" maxLength="200" />
               <span id="activity-error" className="form__input-error"></span>
         </PopupWithForm>
     )
