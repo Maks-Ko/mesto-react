@@ -3,10 +3,7 @@ import PopupWithForm from "./PopupWithForm";
 
 function EditAatarPopup(props) {    
     const urlAvatar = React.useRef();
-
-    // function handleChangeAatar() {
-    //     console.log(urlAvatar.current.value);
-    // }
+    
     function handleSubmit(e) {
         e.preventDefault();
         props.onUpdateAvatar({

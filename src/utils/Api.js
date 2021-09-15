@@ -46,8 +46,8 @@ class Api {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                name: dataCard.image_name,
-                link: dataCard.url_image
+                name: dataCard.name,
+                link: dataCard.link
             })
         })
         .then(this._checkResponse)
